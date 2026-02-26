@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 11 Desktop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Desktop Background -->
+    <div id="desktop" class="desktop">
+        <!-- Desktop Icons -->
+        <div class="desktop-icons">
+            <div class="desktop-icon" data-app="notepad">
+                <img src="asset/Notepad.png" alt="Notepad">
+                <p>Notepad</p>
+            </div>
+
+            <div class="desktop-icon" data-app="calculator">
+                <img src="asset/Calculator.png" alt="Calculator">
+                <p>Calculator</p>
+            </div>
+
+            <div class="desktop-icon" data-app="settings">
+                <img src="asset/settings_icon.png" alt="Settings">
+                <p>Settings</p>
+            </div>
+
+            <div class="desktop-icon" data-app="file-explorer">
+                <img src="asset/File-Explorer.png" alt="File Explorer">
+                <p>File Explorer</p>
+            </div>
+
+            <div class="desktop-icon" data-app="odoo">
+                <div class="odoo-icon-wrapper">O</div>
+                <p>Odoo ERP</p>
+            </div>
+
+            <div class="desktop-icon" data-app="browser">
+                <img src="asset/chrome.jpg" alt="Browser">
+                <p>Browser</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <!-- Left side: Weather, Temperature, Date, Time -->
+        <div class="taskbar-left">
+            <div class="weather-widget">
+                <span class="weather-icon">☀️</span>
+                <span class="temp-display">24°C</span>
+            </div>
+            <div class="date-widget">
+                <span class="date-display">Mon, Jan 18</span>
+            </div>
+        </div>
+
+        <!-- Center: App Launcher -->
+        <div class="taskbar-center">
+            <button class="app-launcher-btn" id="app-launcher-btn">
+                <img src="asset/windows.png" alt="Apps" class="app-launcher-icon">
+            </button>
+
+            <!-- Search Bar -->
+            <div class="taskbar-search">
+                <input type="text" id="taskbar-search-input" placeholder="Search" class="search-input">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <!-- Pinned Applications -->
+            <div class="taskbar-pinned-apps">
+                <button class="pinned-app" data-app="file-explorer" title="File Explorer">
+                    <img src="asset/File-Explorer.png" alt="File Explorer">
+                </button>
+                <button class="pinned-app" data-app="settings" title="Settings">
+                    <img src="asset/settings_icon.png" alt="Settings">
+                </button>
+                <button class="pinned-app" data-app="calculator" title="Calculator">
+                    <img src="asset/Calculator.png" alt="Calculator">
+                </button>
+            </div>
+        </div>
+
+        <!-- Right side: System tray, Control icons, Time -->
+        <div class="taskbar-right">
+            <button class="show-desktop-btn" title="Show Desktop">^</button>
+            <div class="system-controls">
+                <button class="control-icon" title="Wi-Fi">
+                    <svg class="wifi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.94 0" />
+                        <line x1="12" y1="20" x2="12.01" y2="20" />
+                    </svg>
+                </button>
+                <button class="control-icon" title="Volume">🔊</button>
+                <button class="control-icon" title="Battery">🔋</button>
+            </div>
+            <div class="time-widget">
+                <span class="time-display" id="clock">10:30</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Windows Container -->
+    <div id="windows-container"></div>
+
+    <!-- Start Menu (Hidden by default) -->
+    <div id="start-menu" class="start-menu hidden">
+        <div class="start-menu-content">
+            <div class="start-menu-search">
+                <input type="text" placeholder="Type here to search" id="start-search">
+            </div>
+            <div class="start-menu-apps" id="start-menu-apps">
+                <div class="start-menu-item" data-app="notepad">📝 Notepad</div>
+                <div class="start-menu-item" data-app="calculator">🧮 Calculator</div>
+                <div class="start-menu-item" data-app="settings">⚙️ Settings</div>
+                <div class="start-menu-item" data-app="file-explorer">📁 File Explorer</div>
+                <div class="start-menu-item" data-app="odoo">💜 Odoo ERP</div>
+                <div class="start-menu-item" data-app="browser">🌐 Browser</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notifications-container" class="notifications-container"></div>
+
+    <!-- Widgets Panel -->
+    <div id="widgets-panel" class="widgets-panel hidden">
+        <div class="widgets-header">Quick Settings</div>
+        <div class="widgets-content">
+            <div class="widget-item">
+                <label>Wi-Fi</label>
+                <div class="widget-toggle active" data-widget="wifi"></div>
+            </div>
+            <div class="widget-item">
+                <label>Bluetooth</label>
+                <div class="widget-toggle" data-widget="bluetooth"></div>
+            </div>
+            <div class="widget-item">
+                <label>Brightness</label>
+                <input type="range" class="widget-slider" min="0" max="100" value="80" data-widget="brightness">
+            </div>
+            <div class="widget-item">
+                <label>Volume</label>
+                <input type="range" class="widget-slider" min="0" max="100" value="50" data-widget="volume">
+            </div>
+        </div>
+    </div>
+
+    <!-- Developer Info Pop-up Modal -->
+    <div id="developerModal" class="developer-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Developer Information</h2>
+                <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="developer-title">👨‍💻 Sangeerth BS</div>
+                <div class="developer-description">
+                    Odoo Developer | Business Process Automation | ERP Expert
+                </div>
+
+                <div class="developer-info">
+                    <p><strong>📧 Email:</strong> sankeerthbs924@gmail.com</p>
+                    <p><strong>💼 LinkedIn:</strong> linkedin.com/in/sangeerth-bs</p>
+                    <p><strong>🐙 GitHub:</strong> github.com/Hackersbs</p>
+                    <p><strong>🌐 Portfolio:</strong> sangeerth.dev</p>
+                </div>
+
+                <div class="developer-info">
+                    <p style="margin: 0;">
+                        <strong>Expertise:</strong><br>
+                        • Odoo Framework (v14/15/16/17/18)<br>
+                        • Python Development (Odoo Modules)<br>
+                        • XML & QWeb (UI/Reporting)<br>
+                        • Linux Administration
+                    </p>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="modal-button btn-portfolio" id="viewPortfolioBtn">
+                    View Full Portfolio
+                </button>
+                <button class="modal-button btn-cancel" id="cancelModalBtn">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
